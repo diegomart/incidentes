@@ -1,4 +1,6 @@
 <?php
+
+/*
 class ListarContactos
 {
     public $contactos;
