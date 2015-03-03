@@ -49,44 +49,64 @@ if(!isset($_SESSION["codigo"])){
       </div>
     </nav>
     </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-<h1 class="page-header">Procedimiento</h1>
-    <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="200x200" src="imagenes/paso1.png" class="img-circle" data-holder-rendered="true">
-              <h4>Paso 1</h4>
-              <span class="text-muted">Registra Incidente</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
+<br><br>
 
-             
-              <a href="listar_incidentes.php">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="imagenes/paso2.png" data-holder-rendered="true">
-              </a>
-              <h4>Paso 2</h4>
-              <span class="text-muted">CTA Observa incidente</span>
-              
+<?php  
+$con=mysql_connect("localhost","root",""); //conexion MySQl
+mysql_select_db("control_incidentes",$con); //Seleccionar base datos
+$sql=" select * from incidentes"; //código MySQL
+$datos=mysql_query($sql,$con);         
+      ?>
 
+<?php
+/*
+$fecha=date("Y-m-d h:i");
 
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="200x200" src="imagenes/paso3.png" data-holder-rendered="true">
-              <h4>Paso 3</h4>
-              <span class="text-muted">Inspecciona Incidente</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="imagenes/paso4.png" data-holder-rendered="true">
-              <h4>Paso 4</h4>
-              <span class="text-muted">Resuelve CTA incidente</span>
-            </div>
-          </div>
-          </div>
-    
+echo $fecha;
+*/
+?> 
+ 
+<br><br>
 
 
+   
+      <table class="table table-hover" style="width: 36px" >
+        <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+                <th data-field="id" data-align="right">ID</th>
+                <th data-field="fechahora" data-align="right">Fecha</th>
+                <th data-field="descripcion" data-align="right">Descripcion</th>
+                <th data-field="tipoincidente" data-align="right">Tipo de incidente</th>
+                <th data-field="estatus" data-align="right">Estatus</th>
+                <th data-field="ubicacion" data-align="right">Ubicacion</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            while ($row=mysql_fetch_array($datos)) {  
+        ?>
+            <tr> 
+                 <td><?php  $idincidente=$row['idIncidente']; echo "$idincidente"?> </td>
+                 <td><?php  $fechahora=$row['FechaHora'];   echo "$fechahora" ?>       </td>
+                 <td><?php  $descripcion=$row['Descripcion'];   echo "$descripcion"?>       </td>
+                 <td><?php  $tipoindicente=$row['TipoIncidente']; echo "$tipoindicente"?>       </td>
+                 <td><?php  $estatus=$row['Estatus'];   echo "$estatus"?>       </td>
+                 <td><?php  $ubicacion=$row['Ubicacion'];   echo "$ubicacion"?> 
+                
+            </tr>
+        <?php } ?>        
+        </tbody>
+    </table>
+
+<?php
+mysql_close($con);//cerrar conexion
+
+?>
 
 
- <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
